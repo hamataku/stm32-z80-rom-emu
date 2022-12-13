@@ -8,8 +8,8 @@ Hexadecimal [24-Bits]
                                       3 
       000000                          4 .org	0x0000
       000000                          5 start:
-      000000 C3 10 00         [10]    6 	jp	main
+      000000 C3 20 00         [10]    6 	jp	main
                                       7 
-      000010                          8 .org	0x010
-      000010                          9 main:
-      000010 C3 00 00         [10]   10 	jp  start
+      000020                          8 .org	0x020
+      000020                          9 main:
+      000020 C3 00 00         [10]   10 	jp  start

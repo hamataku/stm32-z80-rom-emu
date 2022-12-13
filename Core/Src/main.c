@@ -26,6 +26,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+
+#include "rom.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -66,8 +68,6 @@ void data_pin_output()
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-/* 0~255 */
-uint8_t rom_data[500] = {};
 /* USER CODE END 0 */
 
 /**
@@ -108,14 +108,6 @@ int main(void)
     GPIO_InitStruct_output.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct_output.Pull = GPIO_NOPULL;
     GPIO_InitStruct_output.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-
-    memset(rom_data, 0, sizeof(rom_data));
-    rom_data[0x0] = 0x00;
-    rom_data[0x1] = 0x00;
-    rom_data[0x2] = 0x00;
-    rom_data[0x80] = 0xC3;
-    rom_data[0x81] = 0x00;
-    rom_data[0x82] = 0x00;
 
     uint16_t address = 0;
 

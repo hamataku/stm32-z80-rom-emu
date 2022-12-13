@@ -5,6 +5,6 @@
 start:
 	jp	main
 
-.org	0x010
+.org	0x020
 main:
 	jp  start
