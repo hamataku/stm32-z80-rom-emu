@@ -68,11 +68,14 @@ set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${PROJECT_NAME}.
 
 if(EXISTS /proc/sys/fs/binfmt_misc/WSLInterop)
    # WINDOWS(WSL)
-   add_custom_target(write COMMAND python3 ../z80/hex2source.py COMMAND make COMMAND /mnt/c/Program\ Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/STM32_Programmer_CLI.exe -c port=SWD -d ./${PROJECT_NAME}.elf -s )
+   add_custom_target(asm_write COMMAND python3 ../z80/hex2source.py COMMAND make COMMAND /mnt/c/Program\ Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/STM32_Programmer_CLI.exe -c port=SWD -d ./${PROJECT_NAME}.elf -s )
+   add_custom_target(write COMMAND make COMMAND /mnt/c/Program\ Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/STM32_Programmer_CLI.exe -c port=SWD -d ./${PROJECT_NAME}.elf -s )
 elseif(EXISTS /Applications/STMicroelectronics)
    # MAC
-   add_custom_target(write COMMAND python3 ../z80/hex2source.py COMMAND make COMMAND /Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin/STM32_Programmer_CLI -c port=SWD -d ./${PROJECT_NAME}.elf -s )
+   add_custom_target(asm_write COMMAND python3 ../z80/hex2source.py COMMAND make COMMAND /Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin/STM32_Programmer_CLI -c port=SWD -d ./${PROJECT_NAME}.elf -s )
+   add_custom_target(write COMMAND make COMMAND /Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin/STM32_Programmer_CLI -c port=SWD -d ./${PROJECT_NAME}.elf -s )
 else()
    # Native LINUX
-   add_custom_target(write COMMAND python3 ../z80/hex2source.py COMMAND make COMMAND /usr/local/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/STM32_Programmer.sh -c port=SWD -d ./${PROJECT_NAME}.elf -s )
+   add_custom_target(asm_write COMMAND python3 ../z80/hex2source.py COMMAND make COMMAND /usr/local/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/STM32_Programmer.sh -c port=SWD -d ./${PROJECT_NAME}.elf -s )
+   add_custom_target(write COMMAND make COMMAND /usr/local/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/STM32_Programmer.sh -c port=SWD -d ./${PROJECT_NAME}.elf -s )
 endif()

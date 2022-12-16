@@ -3,8 +3,8 @@
 
 .org	0x0000
 start:
-	jp	main
+	jp	main1
 
-.org	0x020
-main:
+.org	0x0100
+main1:
 	jp  start
