@@ -8,16 +8,12 @@
 #include "gpio.h"
 #include "stm32f4xx_it.h"
 
-#define PRINT
+// #define PRINT
 
 uint32_t moder_output = 0;
 uint32_t moder_analog = 0;
 
 #define WAIT()           \
-    asm volatile("nop"); \
-    asm volatile("nop"); \
-    asm volatile("nop"); \
-    asm volatile("nop"); \
     asm volatile("nop"); \
     asm volatile("nop"); \
     asm volatile("nop"); \
@@ -55,7 +51,7 @@ void main_cycle(void)
     uint16_t address_prev = 0;
     while (1) {
         CLK_OUT_GPIO_Port->ODR ^= CLK_OUT_Pin;
-        WAIT();
+        // WAIT();
 
         if ((GPIOC->IDR & 3U) == 0x00) {
             // set data pin to output
