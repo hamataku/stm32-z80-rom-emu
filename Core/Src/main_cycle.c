@@ -8,7 +8,7 @@
 #include "gpio.h"
 #include "stm32f4xx_it.h"
 
-#define PRINT
+// #define PRINT
 
 uint32_t moder_output = 0;
 uint32_t moder_analog = 0;
@@ -57,7 +57,7 @@ void main_cycle(void)
         CLK_OUT_GPIO_Port->ODR ^= CLK_OUT_Pin;
 
         // 10 cycle wait
-        WAIT();
+        // WAIT();
 
         if ((GPIOC->IDR & 3U) == 0x00) {
             // set data pin to output
