@@ -8,7 +8,6 @@
 #include "gpio.h"
 #include "stm32f4xx_it.h"
 
-#define PERIOD 100
 #define PRINT
 
 uint32_t moder_output = 0;
@@ -46,13 +45,14 @@ void main_init(void)
     HAL_GPIO_WritePin(RESET_GPIO_Port, RESET_Pin, GPIO_PIN_SET);
     HAL_Delay(500);
     HAL_GPIO_WritePin(RESET_GPIO_Port, RESET_Pin, GPIO_PIN_RESET);
-    HAL_Delay(100);
+    HAL_Delay(500);
     HAL_GPIO_WritePin(RESET_GPIO_Port, RESET_Pin, GPIO_PIN_SET);
 }
 
 void main_cycle(void)
 {
     uint16_t address = 0;
+    uint16_t address_prev = 0;
     while (1) {
         CLK_OUT_GPIO_Port->ODR ^= CLK_OUT_Pin;
 
@@ -66,7 +66,10 @@ void main_cycle(void)
             address = (GPIOB->IDR & 0x77f7) | (GPIOC->IDR & 0x0808);
             GPIOA->ODR = ((uint32_t)rom_data[address]) << 5;
 #ifdef PRINT
-            printf("\n%x,%x", address | ((uint16_t)(GPIOC->IDR & 0x01) << 15), rom_data[address]);
+            if (address != address_prev) {
+                printf("\n%x,%x", address | ((uint16_t)(GPIOC->IDR & 0x01) << 15), rom_data[address]);
+                address_prev = address;
+            }
 #endif
         } else {
             // set data pin to analog(high impedence)
@@ -74,7 +77,10 @@ void main_cycle(void)
 
             address = (GPIOB->IDR & 0x77f7) | (GPIOC->IDR & 0x0808);
 #ifdef PRINT
-            printf("        ");
+            if ((GPIOC->IDR & 0x01) && (address != address_prev)) {
+                printf("\n%x", address | ((uint16_t)(GPIOC->IDR & 0x01) << 15));
+                address_prev = address;
+            }
 #endif
         }
     }
