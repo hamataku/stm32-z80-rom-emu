@@ -8,8 +8,16 @@ Hexadecimal [24-Bits]
                                       3 
       000000                          4 .org	0x0000
       000000                          5 start:
-      000000 C3 20 00         [10]    6   jp main
-                                      7 
-      000020                          8 .org	0x0020
-      000020                          9 main:
-      000020 C3 00 00         [10]   10   jp start
+      000000 3E 0F            [ 7]    6   ld a,#0b00001111 ; PIOモード0
+      000002 D3 1D            [11]    7   out (0x1d),a
+      000004 C3 00 01         [10]    8   jp main
+                                      9 
+                                     10 ; http://www.apony.com/elec/elec10/elec10.html
+                                     11 
+      000100                         12 .org	0x100
+      000100                         13 main:
+      000100 3E 00            [ 7]   14   ld a,#0x00
+      000102 D3 1C            [11]   15   out (0x1c),a
+      000104 3E 01            [ 7]   16   ld a,#0x01
+      000106 D3 1C            [11]   17   out (0x1c),a
+      000108 C3 00 01         [10]   18   jp main

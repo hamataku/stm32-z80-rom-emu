@@ -8,7 +8,7 @@
 #include "gpio.h"
 #include "stm32f4xx_it.h"
 
-// #define PRINT
+#define PRINT
 
 uint32_t moder_output = 0;
 uint32_t moder_analog = 0;
@@ -64,6 +64,7 @@ void main_cycle(void)
             address = (GPIOB->IDR & 0x77f7) | (GPIOC->IDR & 0x0808);
             GPIOA->ODR = ((uint32_t)rom_data[address]) << 5;
 #ifdef PRINT
+            HAL_Delay(10);
             if (address != address_prev) {
                 printf("\n%x,%x", address | ((uint16_t)(GPIOC->IDR & 0x01) << 15), rom_data[address]);
                 address_prev = address;
@@ -74,6 +75,7 @@ void main_cycle(void)
             GPIOA->MODER = moder_analog;
 
 #ifdef PRINT
+            HAL_Delay(10);
             address = (GPIOB->IDR & 0x77f7) | (GPIOC->IDR & 0x0808);
             if ((GPIOC->IDR & 0x01) && (address != address_prev)) {
                 printf("\n%x", address | ((uint16_t)(GPIOC->IDR & 0x01) << 15));
