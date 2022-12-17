@@ -8,4 +8,8 @@ Hexadecimal [24-Bits]
                                       3 
       000000                          4 .org	0x0000
       000000                          5 start:
-      000000 C3 FA 7F         [10]    6   jp 0x7ffa
+      000000 C3 F4 7F         [10]    6 	jp	main
+                                      7 
+      007FF4                          8 .org	0x7ff4
+      007FF4                          9 main:
+      007FF4 C3 00 00         [10]   10 	jp  start

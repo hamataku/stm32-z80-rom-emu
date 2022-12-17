@@ -3,4 +3,8 @@
 
 .org	0x0000
 start:
-  jp 0x7ffa
+	jp	main
+
+.org	0x7ff4
+main:
+	jp  start
