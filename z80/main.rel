@@ -1,14 +1,19 @@
 XL3
-H 3 areas 1 global symbols
+H 4 areas 1 global symbols
 S .__.ABS. Def000000
 A _CODE size 0 flags 0 addr 0
 A TEST size 0 flags 8 addr 0
-A TEST0 size 15 flags 8 addr 0
+A TEST0 size 3 flags 8 addr 0
+A TEST1 size 3 flags 8 addr 20
 T 00 00 00
 R 00 00 02 00
 T 00 00 00
 R 00 00 02 00
-T 00 00 00 3E C3 21 00 80 77 3E 00 21 01 80 77 3E
-R 00 00 02 00
-T 0D 00 00 00 21 02 80 77 C3 00 80
-R 00 00 02 00
+T 00 00 00 C3 20 00
+R 00 00 02 00 00 04 03 00
+T 20 00 00
+R 00 00 03 00
+T 20 00 00
+R 00 00 03 00
+T 20 00 00 C3 00 00
+R 00 00 03 00 00 04 02 00

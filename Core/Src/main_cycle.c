@@ -55,9 +55,7 @@ void main_cycle(void)
     uint16_t address_prev = 0;
     while (1) {
         CLK_OUT_GPIO_Port->ODR ^= CLK_OUT_Pin;
-
-        // 10 cycle wait
-        // WAIT();
+        WAIT();
 
         if ((GPIOC->IDR & 3U) == 0x00) {
             // set data pin to output
@@ -75,8 +73,8 @@ void main_cycle(void)
             // set data pin to analog(high impedence)
             GPIOA->MODER = moder_analog;
 
-            address = (GPIOB->IDR & 0x77f7) | (GPIOC->IDR & 0x0808);
 #ifdef PRINT
+            address = (GPIOB->IDR & 0x77f7) | (GPIOC->IDR & 0x0808);
             if ((GPIOC->IDR & 0x01) && (address != address_prev)) {
                 printf("\n%x", address | ((uint16_t)(GPIOC->IDR & 0x01) << 15));
                 address_prev = address;
