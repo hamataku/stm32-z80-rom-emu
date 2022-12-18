@@ -7,12 +7,24 @@ start:
   out (0x1d),a
   jp main
 
-; http://www.apony.com/elec/elec10/elec10.html
-
 .org	0x100
 main:
   ld a,#0x00
   out (0x1c),a
+  ld bc,#0xffff
+  call loop
   ld a,#0x01
   out (0x1c),a
+  ld bc,#0xffff
+  call loop
   jp main
+
+loop:
+  dec bc
+  ld a,b
+  or c
+  jr nz,loop
+  ret
+
+
+  

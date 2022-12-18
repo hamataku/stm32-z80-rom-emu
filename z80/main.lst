@@ -12,12 +12,24 @@ Hexadecimal [24-Bits]
       000002 D3 1D            [11]    7   out (0x1d),a
       000004 C3 00 01         [10]    8   jp main
                                       9 
-                                     10 ; http://www.apony.com/elec/elec10/elec10.html
-                                     11 
-      000100                         12 .org	0x100
-      000100                         13 main:
-      000100 3E 00            [ 7]   14   ld a,#0x00
-      000102 D3 1C            [11]   15   out (0x1c),a
-      000104 3E 01            [ 7]   16   ld a,#0x01
-      000106 D3 1C            [11]   17   out (0x1c),a
-      000108 C3 00 01         [10]   18   jp main
+      000100                         10 .org	0x100
+      000100                         11 main:
+      000100 3E 00            [ 7]   12   ld a,#0x00
+      000102 D3 1C            [11]   13   out (0x1c),a
+      000104 01 FF FF         [10]   14   ld bc,#0xffff
+      000107 CD 17 01         [17]   15   call loop
+      00010A 3E 01            [ 7]   16   ld a,#0x01
+      00010C D3 1C            [11]   17   out (0x1c),a
+      00010E 01 FF FF         [10]   18   ld bc,#0xffff
+      000111 CD 17 01         [17]   19   call loop
+      000114 C3 00 01         [10]   20   jp main
+                                     21 
+      000117                         22 loop:
+      000117 0B               [ 6]   23   dec bc
+      000118 78               [ 4]   24   ld a,b
+      000119 B1               [ 4]   25   or c
+      00011A 20 FB            [12]   26   jr nz,loop
+      00011C C9               [10]   27   ret
+                                     28 
+                                     29 
+                                     30   
