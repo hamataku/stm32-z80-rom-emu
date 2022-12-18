@@ -8,8 +8,8 @@
 #include "gpio.h"
 #include "stm32f4xx_it.h"
 
-#define PERIOD 0
-// #define PRINT
+#define PERIOD 50
+#define PRINT
 
 uint32_t moder_output = 0;
 uint32_t moder_analog = 0;
