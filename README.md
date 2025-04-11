@@ -1,8 +1,8 @@
 # stm32-z80-rom-emu
 AKI-80のROMをSTM32F446REでエミュレートする。  
-これにより、UV-EPROMを用意せずともst-link経由で書き込むだけでAKI-80をプログラミングできる。
+これにより、UV-EPROMを用意せずともst-link経由で書き込むだけでAKI-80をプログラミング可能
+
 ## 開発環境
-- macOS Catalina (下の依存が満たせれば何でも良い)
 - CubeMX 6.7.0
 
 ## 使用機材
@@ -22,7 +22,7 @@ AKI-80のROMをSTM32F446REでエミュレートする。
 
 ![配線2](misc/nucleo.JPG)
 
-プロトタイプゆえ、かなり雑な配線になっているのはお許しいただきたい、、、  
+※プロトタイプ、という言い訳
 
 ## How to build
 - `mkdir build`
